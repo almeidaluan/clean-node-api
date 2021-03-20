@@ -1,17 +1,14 @@
+import { badRequest } from '../helpers/http-helper'
+import { MissingParam } from './../erros/missing-param'
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { HttpRequest, HttpResponse } from './../protocols/http'
 export class SignUpController {
-  handle (httpRequest: any): any {
+  handle (httpRequest: HttpRequest): any {
     if (!httpRequest.body.name) {
-      return {
-        statusCode: 400,
-        body: new Error('Missing param: name')
-      }
+      return badRequest(new MissingParam('name'))
     }
     if (!httpRequest.body.email) {
-      return {
-        statusCode: 400,
-        body: new Error('Missing param: email')
-      }
+      return badRequest(new MissingParam('email'))
     }
   }
 }
