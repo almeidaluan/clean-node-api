@@ -103,7 +103,7 @@ describe('', () => {
         name: 'any_name',
         email: 'invalid_email@mail.com',
         password: 'any_password',
-        passwordConfirmation: 'any_confirmation_password'
+        passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
@@ -122,7 +122,7 @@ describe('', () => {
         name: 'any_name',
         email: 'any_email@gmail.com',
         password: 'any_password',
-        passwordConfirmation: 'any_confirmation_password'
+        passwordConfirmation: 'any_password'
       }
     }
     sut.handle(httpRequest)
@@ -139,12 +139,30 @@ describe('', () => {
         name: 'any_name',
         email: 'any_email@mail.com',
         password: 'any_password',
-        passwordConfirmation: 'any_confirmation_password'
+        passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
+  })
+
+  it('Should return 400 if password confirmation fails', () => {
+    const emailValidatorStub = makeEmailValidatorWithError()
+    const sut = new SignUpController(emailValidatorStub)
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_confirmation_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   })
 })
