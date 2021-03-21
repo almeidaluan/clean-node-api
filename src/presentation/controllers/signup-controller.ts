@@ -1,10 +1,9 @@
-import { ServerError } from './../erros/server-error'
-import { InvalidParamError } from './../erros/invalid-param'
-import { EmailValidator } from './../protocols/email-validator'
-import { badRequest } from '../helpers/http-helper'
-import { MissingParamError } from './../erros/missing-param'
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpRequest, HttpResponse } from './../protocols/http'
+import { MissingParamError, InvalidParamError, ServerError } from './../erros'
+import { badRequest } from '../helpers/http-helper'
+import { EmailValidator } from '../protocols/email-validator'
+
 export class SignUpController {
   private readonly emailValidator: EmailValidator
 
