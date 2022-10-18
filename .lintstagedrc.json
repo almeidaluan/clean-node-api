@@ -1,6 +1,4 @@
+// exemplo 1
 {
-    "*.ts": [
-        "eslint 'src/**' --fix",
-        "git add"
-    ]
+  "*.{js,jsx,ts}": "eslint --fix" // --fix corrige automaticamente os erros mais simples
 }
