@@ -1,4 +1,4 @@
 // exemplo 1
 {
-  "*.{js,jsx,ts}": "eslint --fix" // --fix corrige automaticamente os erros mais simples
+    "*.{js,jsx,ts}": ["eslint --fix","npm run test:staged"] // --fix corrige automaticamente os erros mais simples
 }
